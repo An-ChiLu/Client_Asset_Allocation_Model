@@ -1,4 +1,3 @@
-DESCRIPTION OF DATA FROM KAGGLE
 # Dataset Description
 
 This directory contains the datasets used for the **Client Asset Allocation Modeling** project.
@@ -9,31 +8,35 @@ project to model client portfolio allocation behavior.
 
 ---
 
-## Source
+## Data Source
 
-- Synthetic banking client dataset
+The original dataset is sourced from Kaggle:  
+- **Dataset:** Bank Marketing Dataset for Term Deposit Prediction  
+- **Link:** https://www.kaggle.com/datasets/nisargpatel344/bank-marketing-dataset-for-term-deposit-prediction
+
+The original dataset contains banking client records with demographic, financial, behavioral, and marketing
+interaction features. It was originally designed for a **binary classification task**, where the target
+variable indicates whether a client subscribed to a term deposit.
+
+- Total Features: 45
 - Total records: 100,000
-- Original target variable: `TermDepositSubscribed` (binary)
-- File format: CSV
 
 ---
 
 ## Feature Selection
 
-Only features relevant to **client financial capacity, life stage, and behavioral patterns** are used.
-Marketing-specific and post-decision variables are excluded to avoid information leakage.
+To fit the asset allocation modeling setting, the original dataset was modified as follows:
 
-### Included Feature Categories
-- **Demographics:** age, employment status, education level
-- **Financial capacity:** income, credit score, balance indicators
-- **Relationship depth:** account tenure, number of products
-- **Behavioral indicators:** transaction frequency, digital activity
+- Selected only features relevant to client **financial capacity, life stage, and behavioral patterns**
+- Removed marketing-specific variables and the original target variable to avoid information leakage
+- Cleaned and encoded categorical variables for model training
+- Constructed synthetic portfolio allocation targets across multiple asset classes
+- Normalized allocation weights so that each client’s portfolio sums to 1
+- Sampled 50% of the original records to reduce computational cost while maintaining sufficient
+  data coverage for model training and evaluation
 
-### Excluded Features
-- Marketing campaign identifiers
-- Contact channel and call duration
-- Original target variable (`TermDepositSubscribed`)
-- Any features dependent on marketing outcomes
+The resulting dataset is used to train **multi-output regression models** that predict client portfolio
+allocations based on structured client profile data.
 
 ---
 
@@ -47,8 +50,8 @@ Target variables are **synthetically constructed portfolio allocation weights** 
 - Cash  
 - Alternatives  
 
-Allocations are generated using financial heuristics based on client characteristics and normalized
-to sum to 1. The modeling task is framed as a **multi-output regression problem**.
+Allocations are generated using financial features based on client characteristics and normalized
+to sum to 1. 
 
 ---
 
@@ -62,9 +65,5 @@ to sum to 1. The modeling task is framed as a **multi-output regression problem*
 
 ---
 
-## Notes
 
-- All data is synthetic and used solely for educational and demonstration purposes.
-- No personally identifiable information (PII) is included.
 
-https://www.kaggle.com/datasets/nisargpatel344/bank-marketing-dataset-for-term-deposit-prediction
